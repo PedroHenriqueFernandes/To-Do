@@ -1,5 +1,6 @@
 import img from '../assets/Clipboard.svg'
 import styles from './List.module.css'
+import trash from '../assets/trash.svg'
 
 export function List() {
     return (
@@ -17,6 +18,17 @@ export function List() {
                             <p className={styles.bold}>Você ainda não tem tarefas cadastradas</p>
                             <p className={styles.normal}>Crie tarefas e organize seus itens a fazer</p>
                         </p>
+                    </div>
+
+                    <div className={styles.listTask}>
+                        <div className={styles.checkAndText}>
+
+                            <input className={styles.optionInput} type="chekced" />
+
+                            <p>Tarefa 1</p>
+                        </div>
+
+                        <div className={styles.trash}><img src={trash} alt="" /></div>
                     </div>
                 </main>
             </div>
