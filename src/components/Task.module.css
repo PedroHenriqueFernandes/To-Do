@@ -17,6 +17,14 @@
     height: 1rem;
 }
 
+.listTask button{
+    background: transparent;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .checkAndText{
     display: flex;
     justify-content: center;

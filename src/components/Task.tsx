@@ -5,13 +5,14 @@ import img from '../assets/Clipboard.svg'
 import { useState } from 'react'
 
 interface Tasks {
+    id: string;
     content: string;
     taskIsEmpty: boolean
+    deleteTask: (task:string)=>void
 }
 
-export function Task({ content, taskIsEmpty }: Tasks) {
+export function Task({ id, content, taskIsEmpty, deleteTask }: Tasks) {
     const [check, setCheck] = useState(false)
-    const [imgCheckState, setImgCheckState] = useState(checkImg)
 
     function handleCheckTask() {
         setCheck(!check)
@@ -19,7 +20,7 @@ export function Task({ content, taskIsEmpty }: Tasks) {
 
     function showTask(){
         if(check){
-            return <img src={imgCheckState} alt="" />
+            return <img src={checkImg} alt="" />
         }
     }
 
@@ -27,6 +28,10 @@ export function Task({ content, taskIsEmpty }: Tasks) {
         if (taskIsEmpty) {
             return noHaveTasks()
         } else return haveTasks()
+    }
+
+    function handleDeleteTask(){
+        deleteTask(id)
     }
 
     function haveTasks() {
@@ -40,7 +45,7 @@ export function Task({ content, taskIsEmpty }: Tasks) {
                         <p>{content}</p>
                     </div>
 
-                    <div className={styles.trash}><img src={trash} alt="" /></div>
+                    <button onClick={handleDeleteTask} className={styles.trash}><img src={trash} alt="" /></button>
                 </div>
             )
         }
