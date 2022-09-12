@@ -6,14 +6,17 @@ import { useState } from 'react'
 interface Tasks {
     id: string;
     content: string;
+    isCheck: boolean
     deleteTask: (task:string)=>void
+    checkTask: (task:string)=> void
 }
 
-export function Task({ id, content, deleteTask }: Tasks) {
+export function Task({ id, content, deleteTask, checkTask }: Tasks) {
     const [check, setCheck] = useState(false)
 
     function handleCheckTask() {
         setCheck(!check)
+        checkTask(id)
     }
 
     function showTask(){

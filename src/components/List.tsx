@@ -6,15 +6,17 @@ import img from '../assets/Clipboard.svg'
 import styles from './List.module.css'
 import imgPlus from '../assets/plus.svg'
 
-interface Itask {
+interface Task {
     id: string,
-    content: string
+    content: string,
+    isCheck: boolean
 }
 
 export function List() {
     const [newTask, setNewTask] = useState('')
-    const [tasks, setTasks] = useState<Itask[]>([])
+    const [tasks, setTasks] = useState<Task[]>([])
     const [isEmpty, setIsEmpty] = useState(true)
+    const [taskCheck, setTaskCheck] = useState(0)
 
     function handleCreateTasks() {
         event!.preventDefault()
@@ -23,8 +25,31 @@ export function List() {
         setTasks([...tasks, {
             id: uuidv4(),
             content: newTask,
+            isCheck: false
         }])
         setNewTask('')
+    }
+
+    function setCheck(id: string){
+        const newTasksWithNewCheck = tasks.map(task =>{
+            if(task.id === id){
+                task.isCheck = !task.isCheck
+            }
+
+            return task
+        })
+
+        setTasks(newTasksWithNewCheck)
+        console.log(newTasksWithNewCheck)
+        countTasksCheck()
+    }
+
+    function countTasksCheck(){
+        const counterTask = tasks.filter(task => {
+            return task.isCheck === true
+        })
+
+        setTaskCheck(counterTask.length)
     }
 
     function handleNewCommentChange(event: ChangeEvent<HTMLInputElement>) {
@@ -34,11 +59,11 @@ export function List() {
         } else if(event.target.value === '') setIsEmpty(true)
     }
 
-    function deleteTask(commentToDelete: string) {
-        const commentsWithoutDeletedOne = tasks.filter(task => {
-            return task.id != commentToDelete
+    function deleteTask(taskToDelete: string) {
+        const tasksWithoutDeletedOne = tasks.filter(task => {
+            return task.id != taskToDelete
         })
-        setTasks(commentsWithoutDeletedOne);
+        setTasks(tasksWithoutDeletedOne);
     }
 
     return (
@@ -52,7 +77,7 @@ export function List() {
                 <div className={styles.boxList}>
                     <header className={styles.headerList}>
                         <div className={styles.tarefasCriadas}>Tarefas Criadas <div className={styles.numberCount}><span>{tasks.length}</span></div></div>
-                        <div className={styles.tarefasConcluidas}>Concluidas <div className={styles.numberCount}><span>0</span></div></div>
+                        <div className={styles.tarefasConcluidas}>Concluidas <div className={styles.numberCount}><span>{taskCheck}</span></div></div>
                     </header>
                 </div>
 
@@ -63,7 +88,9 @@ export function List() {
                                 id={task.id} 
                                 key={task.id} 
                                 content={task.content} 
+                                isCheck={false}
                                 deleteTask={deleteTask}
+                                checkTask={setCheck}
                             />
                         )
                     )) : (
