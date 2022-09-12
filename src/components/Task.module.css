@@ -23,6 +23,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 }
 
 .checkAndText{
@@ -36,15 +38,6 @@
     height: 1.5rem;
     background: transparent;
     border: 1px solid var(--blue-500);
-}
-
-.noTask{
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 4rem 0;
 }
 
 .noTask .bold{
