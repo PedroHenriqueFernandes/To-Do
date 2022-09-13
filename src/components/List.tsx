@@ -40,12 +40,11 @@ export function List() {
         })
 
         setTasks(newTasksWithNewCheck)
-        console.log(newTasksWithNewCheck)
-        countTasksCheck()
+        countTasksCheck(newTasksWithNewCheck)
     }
 
-    function countTasksCheck(){
-        const counterTask = tasks.filter(task => {
+    function countTasksCheck(task: Task[]){
+        const counterTask = task.filter(task => {
             return task.isCheck === true
         })
 
@@ -64,6 +63,7 @@ export function List() {
             return task.id != taskToDelete
         })
         setTasks(tasksWithoutDeletedOne);
+        countTasksCheck(tasksWithoutDeletedOne)
     }
 
     return (
