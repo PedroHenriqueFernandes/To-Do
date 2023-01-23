@@ -1,4 +1,4 @@
-<h1 align="center">🧪 Timer</h1>
+<h1 align="center">🧪 To Do</h1>
 
 🔗 [Link da aplicação](https://to-do-pedrohenriquefernandes.vercel.app)
 
